@@ -1,22 +1,31 @@
-const { Model, DataTypes } = require('sequelize');
-const bcrypt = require('bcrypt');
+const mongoose = require('mongoose');
+const UserMiddleware = require('../middlewares/UserMiddlewares');
 
-class User extends Model {
-    static init(sequelize) {
-        super.init({
-            username: DataTypes.STRING,
-            password: DataTypes.STRING,
-        }, {
-            sequelize,
-            hooks: {
-                beforeCreate: (user) => {
-                    {
-                        user.password = bcrypt.hashSync(String(user.password), 10);
-                    } 
-                }
-            }
-        });
-    }
-}
+const UserSchema = new mongoose.Schema({
+    id: mongoose.Schema.ObjectId,
+    username: {
+        type: String,
+        unique: true,
+        required: true
+    },
+    password: {
+        type: String,
+        required: true
+    },
+    tweets: [{
+        type: mongoose.Schema.ObjectId, 
+        ref: 'Tweet'
+    }],
+    following: [{
+        type: mongoose.Schema.ObjectId,
+        ref: 'User'
+    }],
+    followed: [{
+        type: mongoose.Schema.ObjectId,
+        ref: 'User'
+    }]
+});
 
-module.exports = User;
+UserSchema.pre('save', UserMiddleware.hashPassword);
+
+module.exports = mongoose.model('User', UserSchema);
