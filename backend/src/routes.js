@@ -1,8 +1,12 @@
 const express = require('express');
+const AuthController = require('./controllers/AuthController');
 const UserController = require('./controllers/UserController');
 const TweetController = require('./controllers/TweetController');
 
 const routes = express.Router();
+
+
+routes.post('/authenticate', AuthController.authenticate);
 
 routes.post('/users', UserController.save);
 routes.get('/users', UserController.find);
@@ -13,5 +17,6 @@ routes.delete('/users', UserController.delete);
 routes.post('/tweets', TweetController.save);
 routes.get('/tweets', TweetController.find);
 routes.delete('/tweets', TweetController.delete);
+
 
 module.exports = routes;

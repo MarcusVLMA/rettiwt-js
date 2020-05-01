@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const UserMiddleware = require('../middlewares/UserMiddlewares');
+const UserMiddleware = require('../middlewares/models/UserMiddlewares');
 
 const UserSchema = new mongoose.Schema({
     id: mongoose.Schema.ObjectId,
@@ -10,7 +10,8 @@ const UserSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: true
+        required: true,
+        select: false
     },
     tweets: [{
         type: mongoose.Schema.ObjectId, 

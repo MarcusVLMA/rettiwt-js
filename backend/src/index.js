@@ -2,7 +2,11 @@ require('dotenv/config');
 
 const express = require('express');
 const mongoose = require('mongoose');
-const routes = require('./routes');
+const cors = require('cors');
+
+const authRoutes = require('./routes/AuthRoutes');
+const userRoutes = require('./routes/UserRoutes');
+const tweetRoutes = require('./routes/TweetRoutes');
 
 const app = express();
 
@@ -11,7 +15,11 @@ mongoose.connect(`mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONG
     { useNewUrlParser: true, useUnifiedTopology: true }
 );
 
+app.use(cors());
 app.use(express.json());
-app.use(routes);
 
-app.listen(3000);
+authRoutes(app);
+userRoutes(app);
+tweetRoutes(app);
+
+app.listen(3001);

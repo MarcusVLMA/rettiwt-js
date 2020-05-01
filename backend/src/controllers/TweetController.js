@@ -26,19 +26,8 @@ module.exports = {
     },
     async find(req, res) {
         try {
-            if(req.query.userId) {
-                const user = await User.findById(req.query.userId);
-                await Tweet.find({
-                    'author': { $in: user.following }
-                }, (error, tweets) => {
-                    if (error) {
-                        throw new Error('Could not get tweets now. Please, try again later.');
-                    }
-
-                    return res.json(tweets);
-                });
-            } else if(req.query.id) {
-                const tweet = await Tweet.findById(req.query.id);
+            if(req.params.id) {
+                const tweet = await Tweet.findById(req.params.id);
 
                 return res.json(tweet);
             } else {
