@@ -26,7 +26,7 @@ export default function Login(props) {
 
   const { enqueueSnackbar } = useSnackbar();
   const { history } = props;
-  console.log('DISGRACINHA', history, props);
+  
 
   const login = async () => {
     if(!(username && password)) {
