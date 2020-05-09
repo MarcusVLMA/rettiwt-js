@@ -7,7 +7,6 @@ const routes = express.Router();
 
 routes.use(verifyAuthMiddleware);
 
-routes.post('/', UserController.save);
 routes.get('/', UserController.find);
 routes.get('/:userId', UserController.find);
 routes.put('/', UserController.update);

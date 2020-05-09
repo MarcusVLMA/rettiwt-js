@@ -2,20 +2,6 @@ const User = require('../models/User');
 const Tweet = require('../models/Tweet');
 
 module.exports = {
-    async save(req, res) {
-        try {
-            const { username, password } = req.body;
-        
-            const user = await User.create({
-                username,
-                password
-            });
-
-            return res.json(user);
-        } catch(error) {
-            return res.json({ error: String(error) }, 500);
-        }
-    },
     async find(req, res) {
         try {
             if(req.params.userId) {

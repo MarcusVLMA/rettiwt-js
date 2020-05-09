@@ -24,5 +24,19 @@ module.exports = {
         user.password = undefined;
 
         return res.json({ user, token });
-    }
+    },
+    async register(req, res) {
+        try {
+            const { username, password } = req.body;
+        
+            const user = await User.create({
+                username,
+                password
+            });
+
+            return res.json(user);
+        } catch(error) {
+            return res.json({ error: String(error) }, 500);
+        }
+    },
 };
