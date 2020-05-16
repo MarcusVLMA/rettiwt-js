@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { GitHub, AccountCircle, Lock } from '@material-ui/icons';
 import { 
   TextField, 
-  InputAdornment, 
-  Button
+  InputAdornment
 } from '@material-ui/core';
 import { useSnackbar } from 'notistack';
+import { Link } from 'react-router-dom';
 import LoginIllustration from '../assets/login-illustration.svg';
-import { 
-  Background, 
+import { Background, GreenButton } from '../styles/General';
+import {
   LoginCard, 
   LoginImage, 
   LoginCardLeft,
@@ -50,7 +50,7 @@ export default function Login(props) {
 
   return (
     <Background className="d-flex justify-content-center align-items-center">
-      <LoginCard className="card">
+      <LoginCard>
         <LoginCardLeft className="d-flex flex-column justify-content-center align-items-center">
           <LoginImage src={LoginIllustration} />
           <div className="d-flex align-items-center mt-5">
@@ -93,9 +93,12 @@ export default function Login(props) {
               ),
             }}
           />
-          <Button className="w-100 fieldsButton" onClick={login} variant="contained" disableElevation>
+          <GreenButton className="w-100 mb-5 fieldsButton" onClick={login} variant="contained" disableElevation>
             Login
-          </Button>
+          </GreenButton>
+          <Link to="/signup">
+            Doesn't have an account? Sign Up!
+          </Link>
         </LoginCardRight>
       </LoginCard>
     </Background>

@@ -1,20 +1,15 @@
+import React from 'react';
 import styled from 'styled-components';
 
-export const Background = styled.div`
-    background: linear-gradient(45deg, #FFFFFF, #6DD5FA, #2980B9);
-    width: 100vw;
-    height: 100vh; 
-`;
-
-export const LoginCard = styled.div`
+const _LoginCard = styled.div`
     width: 60vw;
     height: 70vh;
     border-radius: 10px;
     display: grid;
     grid-template-columns: 1fr 1.2fr;
     grid-template-rows: 1fr;
-
 `;
+export const LoginCard = props => <_LoginCard className='card' {...props}/>
 
 export const LoginCardLeft = styled.div`
     grid-column-start: 1;
@@ -50,9 +45,8 @@ export const LoginCardRight = styled.div`
         font-weight: 800;
     }
 
-    .fieldsButton {
-        font-weight: bold;
-        color: #FFFFFF;
-        background-color: #32CD32;
+    .signUpLink {
+        font-size: 15px;
+        font-weight: bold;   
     }
 `;
