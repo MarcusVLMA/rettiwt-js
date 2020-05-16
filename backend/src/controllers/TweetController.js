@@ -7,27 +7,24 @@ module.exports = {
             const { authorId, text } = req.body;
 
             const user = await User.findById(authorId);
-            await Tweet.create({ 
+
+            const tweet = await Tweet.create({ 
                 text,
                 author: user._id
-            }, (error, tweet) => {
-                if(error) {
-                    throw new Error('Could not tweet this. Please, try again later');
-                }
-
-                user.tweets.push(tweet);
-                user.save();
-
-                return res.json(tweet);
             });
+            
+            user.tweets.push(tweet);
+            await user.save();
+
+            return res.json(tweet);
         } catch(error) {
             return res.json({ error: String(error) }, 500);
         }
     },
     async find(req, res) {
         try {
-            if(req.params.id) {
-                const tweet = await Tweet.findById(req.params.id);
+            if(req.params.tweetId) {
+                const tweet = await Tweet.findById(req.params.tweetId);
 
                 return res.json(tweet);
             } else {
@@ -41,10 +38,10 @@ module.exports = {
     },
     async delete(req, res) {
         try {
-            const tweet = await Tweet.findById(req.body.id);
+            const tweet = await Tweet.findById(req.body._id);
             var user = await User.findById(tweet.author);
 
-            const response = await Tweet.deleteOne({ _id: req.body.id });
+            const response = await Tweet.deleteOne({ _id: req.body._id });
             
             user.tweets = user.tweets.filter( (userTweet) => {
                 return userTweet._id !== tweet._id;

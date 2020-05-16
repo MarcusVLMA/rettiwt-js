@@ -27,6 +27,7 @@ const UserSchema = new mongoose.Schema({
     }]
 });
 
-UserSchema.pre('save', UserMiddleware.hashPassword);
+UserSchema.pre('save', UserMiddleware.hashPasswordOnSave);
+UserSchema.pre('updateOne', UserMiddleware.hashPasswordOnUpdate);
 
 module.exports = mongoose.model('User', UserSchema);

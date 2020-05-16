@@ -1,9 +1,7 @@
 const request = require('supertest');
-const bcrypt = require('bcrypt');
-
+const { app } = require('../../src/app');
 const factory = require('../factories');
 const { truncate } = require('../utils');
-const { app } = require('../../src/app');
 
 
 describe('Authentication', () => {
@@ -40,5 +38,31 @@ describe('Authentication', () => {
         });
 
         expect(response.status).toBe(400);
+    });
+});
+
+describe('Register', () => {
+    beforeEach(truncate);
+
+    it('should not register existent user', async () => {
+        const user = await factory.create('User', {
+            username: 'existing-user'
+        });
+
+        const response = await request(app).post('/register').send({
+            username: user.username,
+            password: user.password
+        });
+
+        expect(response.status).toBe(409);
+    });
+
+    it('should register a new user', async () => {
+        const response = await request(app).post('/register').send({
+            username: 'new-user',
+            password: '123456'
+        });
+        
+        expect(response.body.username).toBe('new-user');
     });
 });

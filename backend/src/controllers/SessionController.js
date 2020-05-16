@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 module.exports = {
     async authenticate(req, res) {
         const { username, password } = req.body;
-
+        
         const user = await User.findOne({ username }).select('+password');
     
         if(!user) {
@@ -28,8 +28,13 @@ module.exports = {
     async register(req, res) {
         try {
             const { username, password } = req.body;
-        
-            const user = await User.create({
+            
+            var user = await User.findOne({ username });
+            if(user) {
+                return res.json(user, 409);
+            }
+            
+            user = await User.create({
                 username,
                 password
             });
