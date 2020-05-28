@@ -22,13 +22,26 @@ describe('Find User', () => {
         expect(response.body.username).toBe('test-user');
     });
 
+    it('should return correct user', async () => {
+        await factory.create('User', {
+            username: 'first-user'
+        });
+        const secondUser = await factory.create('User', {
+            username: 'second-user'
+        });
+
+        const response = await request(app).get(`/users/${secondUser._id}`).set('Authorization', `Bearer ${jwtToken}`);
+
+        expect(response.body.username).toBe('second-user');
+    });
+
     it('should return a list of users', async () => {
         await factory.create('User');
         await factory.create('User', {
             username: 'test-user-2'
         });
         
-        const response = await request(app).get('/users').set('Authorization', `Bearer ${jwtToken}`);
+        const response = await request(app).get('/users/all').set('Authorization', `Bearer ${jwtToken}`);
 
         var isFirstUserPresent = false;
         var isSecondUserPresent = false;

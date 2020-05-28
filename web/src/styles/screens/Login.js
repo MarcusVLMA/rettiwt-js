@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
+// eslint-disable-next-line
 const _LoginCard = styled.div`
     width: 60vw;
     height: 70vh;

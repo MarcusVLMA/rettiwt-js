@@ -4,15 +4,19 @@ const Tweet = require('../models/Tweet');
 module.exports = {
     async find(req, res) {
         try {
-            if(req.params.userId) {
-                const user = await User.findById(req.params.userId).populate('tweets');
-                
-                return res.json(user);
-            } else {
-                const users = await User.find().populate('tweets');
+            // If a ID parameter is provided, use it. If don't, use ID decoded from JWT Token
+            var userId = req.params.userId ? req.params.userId : req.userId;
 
-                return res.json(users);
-            }
+            const user = await User.findById(userId).populate('tweets', '-author');
+            return res.json(user);
+        } catch (error) {
+            return res.json({ error: String(error) }, 500);
+        }
+    },
+    async findAll(req, res) {
+        try {
+            const users = await User.find().populate('tweets', '-author');
+            return res.json(users);
         } catch (error) {
             return res.json({ error: String(error) }, 500);
         }

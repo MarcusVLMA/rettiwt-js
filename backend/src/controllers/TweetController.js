@@ -4,12 +4,10 @@ const User = require('../models/User');
 module.exports = {
     async save(req, res) {
         try {
-            const { authorId, text } = req.body;
-
-            const user = await User.findById(authorId);
+            const user = await User.findById(req.userId);
             
             const tweet = await Tweet.create({ 
-                text,
+                text: req.body.text,
                 author: user._id
             });
             

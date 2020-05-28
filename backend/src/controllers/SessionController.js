@@ -17,7 +17,7 @@ module.exports = {
         }
 
         // eslint-disable-next-line no-undef
-        const token = jwt.sign({ id: user.id }, process.env.AUTH_SECRET_HASH, {
+        const token = jwt.sign({ id: user._id }, process.env.AUTH_SECRET_HASH, {
             expiresIn: 86400 // 1 day
         });
 

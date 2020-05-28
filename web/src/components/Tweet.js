@@ -11,13 +11,25 @@ export default function Tweet({ tweet }) {
     const text = tweet.text;
     const tweetDate = new Date(tweet.date);
     const now = Date.now();
-    const timeAgo = (now - tweetDate.getTime())/3600000; // (milliseconds)/3600000 = hours
+
+    const setTimeAgo = () => {
+        var timeAgo = Math.round((now - tweetDate.getTime())/3600000); // (milliseconds)/3600000 = hours
+
+        if(timeAgo !== 0) {
+            return `${timeAgo}h`;
+        } else {
+            timeAgo = Math.round((now - tweetDate.getTime())/60000); // (milliseconds)/60000 = minutes
+            return `${timeAgo}m`
+        }
+    }
+
+    const timeAgo = setTimeAgo();
 
     return (
-        <Container className="p-2">
+        <Container className="pt-2 pb-2 pl-3 pr-3">
             <div className="d-flex align-items-center">
                 <Username>{username}</Username>
-                <HoursAgo className="ml-2">{`${Math.round(timeAgo)}h`}</HoursAgo>
+                <HoursAgo className="ml-2">{timeAgo}</HoursAgo>
             </div>
             <Text className="mt-1">{text}</Text>
         </Container>
