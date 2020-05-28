@@ -13,7 +13,7 @@ import {
   LoginImage, 
   LoginCardLeft,
   LoginCardRight 
-} from '../styles/Login';
+} from '../styles/screens/Login';
 
 import backendApi from '../backendApi';
 
@@ -41,7 +41,7 @@ export default function Login(props) {
       if(response.status === 200) {
         await localStorage.setItem('@rettiwt-js/token', response.data.token);
         enqueueSnackbar('Logged in successfully!', {variant:'success'});
-        history.push('/teste');
+        history.push('/home');
       } else {
         enqueueSnackbar(response.data.error, {variant:'error'});
       }
@@ -93,6 +93,7 @@ export default function Login(props) {
               ),
             }}
           />
+          {/* TODO: Loading indicator */}
           <GreenButton className="w-100 mb-5 fieldsButton" onClick={login} variant="contained" disableElevation>
             Login
           </GreenButton>

@@ -4,7 +4,7 @@ import { TextField, InputAdornment } from '@material-ui/core';
 import { useSnackbar } from 'notistack';
 
 import { Background, GreenButton } from '../styles/General';
-import { SignUpCard, SignUpTitle } from '../styles/SignUp';
+import { SignUpCard, SignUpTitle } from '../styles/screens/SignUp';
 import backendApi from '../backendApi';
 
 export default function SignUp(props) {

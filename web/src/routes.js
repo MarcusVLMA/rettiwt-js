@@ -1,6 +1,7 @@
 import React from 'react';
 import Login from './screens/Login';
 import SignUp from './screens/SignUp';
+import Home from './screens/Home';
 import { isAuthenticated } from './utils';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 
@@ -20,7 +21,7 @@ const Routes = () => (
         <Switch>
             <Route exact path='/' component={Login} />
             <Route exact path='/signup' component={SignUp} />
-            <PrivateRoute path='/teste' component={() => <h1>You are logged in!</h1>} />
+            <PrivateRoute path='/home' component={Home} />
         </Switch>
     </BrowserRouter>
 )

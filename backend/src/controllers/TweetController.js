@@ -7,7 +7,7 @@ module.exports = {
             const { authorId, text } = req.body;
 
             const user = await User.findById(authorId);
-
+            
             const tweet = await Tweet.create({ 
                 text,
                 author: user._id
@@ -24,11 +24,11 @@ module.exports = {
     async find(req, res) {
         try {
             if(req.params.tweetId) {
-                const tweet = await Tweet.findById(req.params.tweetId);
+                const tweet = await Tweet.findById(req.params.tweetId).populate('author', 'username');
 
                 return res.json(tweet);
             } else {
-                const tweets = await Tweet.find();
+                const tweets = await Tweet.find().populate('author', 'username');
 
                 return res.json(tweets);
             }
