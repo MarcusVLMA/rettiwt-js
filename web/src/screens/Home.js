@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import { useSnackbar } from 'notistack';
 
-import Profile from '../components/Profile';
+import Menu from '../components/Menu';
 import Tweet from '../components/Tweet';
 import TweetInput from '../components/TweetInput';
 
@@ -10,7 +10,7 @@ import { Background } from '../styles/General';
 import { FeedCard } from '../styles/screens/Home';
 import backendApi from '../backendApi';
 
-export default function Home() {
+export default function Home(props) {
     const [ tweets, setTweets ] = useState([]);
     const [ newTweet, setNewTweet ] = useState();
     
@@ -56,7 +56,7 @@ export default function Home() {
                     })
                 }
             </FeedCard>
-            <Profile/>
+            <Menu history={props.history}/>
         </Background>
     )
 }

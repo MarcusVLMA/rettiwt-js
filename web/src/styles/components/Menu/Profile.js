@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 
 export const ProfileCard = styled.div`
-    width: 24vw;
-    max-height: 20vh;
     border-radius: 10px;
     background-color: #FFFFFF;
 `;

@@ -4,9 +4,9 @@ import {
     Username,
     InfoTitle,
     InfoValue
-} from '../styles/components/Profile'
+} from '../../styles/components/Menu/Profile'
 
-import backendApi from '../backendApi';
+import backendApi from '../../backendApi';
 
 
 export default function Profile() {
@@ -24,11 +24,11 @@ export default function Profile() {
         <ProfileCard className="d-flex flex-column align-items-center justify-content-center p-3">
             <Username>{user.username}</Username>
             <div className="d-flex w-100 justify-content-between mt-3">
-                <div className="d-flex flex-column align-items-center">
+                <div className="d-flex flex-column align-items-center mr-4">
                     <InfoTitle>Followers</InfoTitle>
                     <InfoValue>{user.followed ? user.followed.length : null}</InfoValue>
                 </div>
-                <div className="d-flex flex-column align-items-center">
+                <div className="d-flex flex-column align-items-center mr-4">
                     <InfoTitle>Following</InfoTitle>
                     <InfoValue>{user.following ? user.following.length : null}</InfoValue>
                 </div>

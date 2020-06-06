@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 // eslint-disable-next-line
-const _LoginCard = styled.div`
+const StyledLoginCard = styled.div`
     width: 60vw;
     height: 70vh;
     border-radius: 10px;
@@ -10,7 +10,7 @@ const _LoginCard = styled.div`
     grid-template-columns: 1fr 1.2fr;
     grid-template-rows: 1fr;
 `;
-export const LoginCard = props => <_LoginCard className='card' {...props}/>
+export const LoginCard = props => <StyledLoginCard className='card' {...props}/>
 
 export const LoginCardLeft = styled.div`
     grid-column-start: 1;

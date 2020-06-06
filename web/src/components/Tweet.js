@@ -6,6 +6,11 @@ import {
     HoursAgo
 } from '../styles/components/Tweet';
 
+const MINUTES_IN_HOUR = 60;
+const MINUTES_IN_DAY = 1440;
+const MINUTES_IN_MONTH = 43200;
+const MINUTES_IN_YEAR = 518400;
+
 export default function Tweet({ tweet }) {
     const username = tweet.author.username;
     const text = tweet.text;
@@ -13,13 +18,18 @@ export default function Tweet({ tweet }) {
     const now = Date.now();
 
     const setTimeAgo = () => {
-        var timeAgo = Math.round((now - tweetDate.getTime())/3600000); // (milliseconds)/3600000 = hours
-
-        if(timeAgo !== 0) {
-            return `${timeAgo}h`;
-        } else {
-            timeAgo = Math.round((now - tweetDate.getTime())/60000); // (milliseconds)/60000 = minutes
-            return `${timeAgo}m`
+        let timeInMinutes = Math.round((now - tweetDate.getTime())/60000); // (milliseconds)/60000 = minutes
+        
+        if(timeInMinutes < MINUTES_IN_HOUR) {
+            return `${Math.floor(timeInMinutes)} minutes`; 
+        } else if (timeInMinutes >= MINUTES_IN_HOUR && timeInMinutes < MINUTES_IN_DAY) {
+            return `${timeInMinutes/MINUTES_IN_HOUR} hours`;
+        } else if(timeInMinutes >= MINUTES_IN_DAY && timeInMinutes < MINUTES_IN_MONTH) {
+            return `${Math.floor(timeInMinutes/MINUTES_IN_DAY)} days`;
+        } else if(timeInMinutes >= MINUTES_IN_MONTH && timeInMinutes < MINUTES_IN_YEAR) {
+            return `${timeInMinutes/MINUTES_IN_MONTH} months`;
+        } else if(timeInMinutes >= MINUTES_IN_YEAR) {
+            return `${timeInMinutes/MINUTES_IN_YEAR} years`;
         }
     }
 
