@@ -6,7 +6,7 @@ module.exports = {
         try {
             // If a ID parameter is provided, use it. If don't, use ID decoded from JWT Token
             var userId = req.params.userId ? req.params.userId : req.userId;
-
+            
             const user = await User.findById(userId).populate('tweets', '-author');
             return res.json(user);
         } catch (error) {

@@ -27,7 +27,7 @@ export default function Home(props) {
                 text: newTweet
             });
 
-            if(!response.ok) {
+            if(response.ok) {
                 getTweets();
                 setNewTweet('');
             } else {
@@ -51,7 +51,7 @@ export default function Home(props) {
                     onSend={sendNewTweet} 
                 />
                 {
-                    tweets.map((tweet) => {
+                    !!tweets.length && tweets.map((tweet) => {
                         return <Tweet tweet={tweet}/>
                     })
                 }
