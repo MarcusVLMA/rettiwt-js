@@ -23,13 +23,13 @@ export default function Tweet({ tweet }) {
         if(timeInMinutes < MINUTES_IN_HOUR) {
             return `${Math.floor(timeInMinutes)} minutes`; 
         } else if (timeInMinutes >= MINUTES_IN_HOUR && timeInMinutes < MINUTES_IN_DAY) {
-            return `${timeInMinutes/MINUTES_IN_HOUR} hours`;
+            return `${(timeInMinutes/MINUTES_IN_HOUR).toFixed(2)} hours`;
         } else if(timeInMinutes >= MINUTES_IN_DAY && timeInMinutes < MINUTES_IN_MONTH) {
             return `${Math.floor(timeInMinutes/MINUTES_IN_DAY)} days`;
         } else if(timeInMinutes >= MINUTES_IN_MONTH && timeInMinutes < MINUTES_IN_YEAR) {
-            return `${timeInMinutes/MINUTES_IN_MONTH} months`;
+            return `${Math.floor(timeInMinutes/MINUTES_IN_MONTH)} months`;
         } else if(timeInMinutes >= MINUTES_IN_YEAR) {
-            return `${timeInMinutes/MINUTES_IN_YEAR} years`;
+            return `${Math.floor(timeInMinutes/MINUTES_IN_YEAR)} years`;
         }
     }
 

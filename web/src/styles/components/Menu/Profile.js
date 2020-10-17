@@ -18,3 +18,15 @@ export const InfoTitle = styled.div`
 export const InfoValue = styled.div`
     font-size: 18px;
 `;
+
+export const ProfilePicture = styled.img`
+    height: 60px;
+    width: 60px;
+    border-radius: 30px;
+    border-width: 1px;
+    border-color: #000000;
+    border-style: solid;
+    &:hover {
+        cursor: pointer;
+    }
+`

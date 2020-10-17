@@ -30,6 +30,16 @@ module.exports = {
             return res.json({ error: String(error) }, 500);
         }
     },
+    async updateProfilePicture(req, res) {
+        try {
+            const { location: url = "" } = req.file;
+            const response = await User.updateOne({ _id: req.userId }, { profile_picture: url });
+            
+            return res.json({ wasUserUpdated: Boolean(response.nModified), url })
+        } catch(error) {
+            return res.json({ error: String(error) }, 500)
+        }
+    },
     async delete(req, res) {
         try {
             const tweetResponse = await Tweet.deleteMany({ author: req.body._id });

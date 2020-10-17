@@ -24,7 +24,12 @@ const UserSchema = new mongoose.Schema({
     followed: [{
         type: mongoose.Schema.ObjectId,
         ref: 'User'
-    }]
+    }],
+    profile_picture: {
+        type: String,
+        unique: false,
+        required: false
+    },
 });
 
 UserSchema.pre('save', UserMiddleware.hashPasswordOnSave);
